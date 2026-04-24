@@ -3,8 +3,8 @@ import { universities } from '@/data/universities';
 import { DIMENSIONS } from '@/lib/types';
 
 describe('universities data', () => {
-  it('has at least 20 universities (seed)', () => {
-    expect(universities.length).toBeGreaterThanOrEqual(20);
+  it('has at least 90 universities (full expansion)', () => {
+    expect(universities.length).toBeGreaterThanOrEqual(90);
   });
 
   it('has unique IDs', () => {

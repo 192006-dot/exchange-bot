@@ -38,12 +38,11 @@ describe('persona: Warm-Seeker (will Strand, Sonne, Spanisch, chillig)', () => {
     t13: 0,
   };
 
-  it('top 3 includes a warm-climate Mediterranean or Latin uni', () => {
+  it('top 3 all have climate score >= 4 (warm)', () => {
     const ranked = runPersona(answers);
-    const top3 = ranked.slice(0, 3).map(r => r.university.id);
-    const warmUnis = ['pompeu-fabra', 'luiss', 'nova-sbe', 'puc-chile', 'fgv-sao-paulo', 'stellenbosch', 'nus', 'hkust', 'unsw'];
-    const hasWarm = top3.some(id => warmUnis.includes(id));
-    expect(hasWarm).toBe(true);
+    for (const r of ranked.slice(0, 3)) {
+      expect(r.university.scores.climate).toBeGreaterThanOrEqual(4);
+    }
   });
 
   it('top match has climate score >= 4', () => {
@@ -130,11 +129,18 @@ describe('persona: Adventurer (will Kulturschock, Natur, Abenteuer)', () => {
     t13: -2, // kompliziert ok
   };
 
-  it('top 3 includes adventurous/non-EU options', () => {
+  it('top 3 all have adventure score >= 4 (non-EU feel)', () => {
     const ranked = runPersona(answers);
-    const top3 = ranked.slice(0, 3).map(r => r.university.id);
-    const adventurous = ['puc-chile', 'fgv-sao-paulo', 'stellenbosch', 'unsw', 'hkust', 'nus'];
-    expect(top3.some(id => adventurous.includes(id))).toBe(true);
+    for (const r of ranked.slice(0, 3)) {
+      expect(r.university.scores.adventure).toBeGreaterThanOrEqual(4);
+    }
+  });
+
+  it('top 3 are outside Europe', () => {
+    const ranked = runPersona(answers);
+    for (const r of ranked.slice(0, 3)) {
+      expect(r.university.continent).not.toBe('europe');
+    }
   });
 
   it('top match has adventure >= 3', () => {

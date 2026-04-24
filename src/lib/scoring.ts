@@ -74,3 +74,30 @@ export function rankReachableUniversities(
   const reachable = universities.filter(u => isReachableByGpa(u.id, userGpa));
   return rankUniversities(user, reachable);
 }
+
+/**
+ * Filter out universities in countries the user has explicitly excluded
+ * (hard "no-go" regardless of match quality).
+ */
+export function filterByExcludedCountries(
+  unis: University[],
+  excludedCountries: string[],
+): University[] {
+  if (excludedCountries.length === 0) return unis;
+  const excludedSet = new Set(excludedCountries);
+  return unis.filter(u => !excludedSet.has(u.country));
+}
+
+/**
+ * Rank with both filters: GPA reachability + country exclusion.
+ */
+export function rankWithFilters(
+  user: UserVector,
+  universities: University[],
+  userGpa: number,
+  excludedCountries: string[],
+): MatchResult[] {
+  const gpaFiltered = universities.filter(u => isReachableByGpa(u.id, userGpa));
+  const excluded = filterByExcludedCountries(gpaFiltered, excludedCountries);
+  return rankUniversities(user, excluded);
+}

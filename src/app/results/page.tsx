@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { universities } from '@/data/universities';
 import { theses } from '@/data/theses';
-import { buildUserVector, rankReachableUniversities } from '@/lib/scoring';
+import { buildUserVector, rankWithFilters } from '@/lib/scoring';
 import { UniversityHero } from '@/components/university-hero';
 import { UniversityRow } from '@/components/university-row';
 import type { Answer, AnswerValue } from '@/lib/types';
@@ -14,6 +14,7 @@ function ResultsContent() {
   const params = useSearchParams();
   const rawAnswers = params.get('answers');
   const rawGpa = params.get('gpa');
+  const rawExcluded = params.get('excluded');
 
   const gpa = rawGpa ? Number.parseFloat(rawGpa) : NaN;
   const gpaValid = !Number.isNaN(gpa) && gpa >= MIN_USER_GPA && gpa <= MAX_USER_GPA;
@@ -36,12 +37,19 @@ function ResultsContent() {
     values = [];
   }
 
+  let excluded: string[] = [];
+  try {
+    excluded = rawExcluded ? JSON.parse(decodeURIComponent(rawExcluded)) : [];
+  } catch {
+    excluded = [];
+  }
+
   const answers: Answer[] = values
     .map((v, i) => (v === null ? null : { thesisId: theses[i].id, value: v }))
     .filter((a): a is Answer => a !== null);
 
   const user = buildUserVector(answers, theses);
-  const ranked = rankReachableUniversities(user, universities, gpa);
+  const ranked = rankWithFilters(user, universities, gpa, excluded);
   const filteredOut = universities.length - ranked.length;
   const top = ranked[0];
   const runnerups = ranked.slice(1, 5);
@@ -56,6 +64,7 @@ function ResultsContent() {
           <p className="text-xs text-zinc-400">
             GPA {gpa.toFixed(2)} · {ranked.length} erreichbar
             {filteredOut > 0 && ` · ${filteredOut} ausgefiltert`}
+            {excluded.length > 0 && ` · ${excluded.length} Länder ausgeschlossen`}
           </p>
         </div>
 

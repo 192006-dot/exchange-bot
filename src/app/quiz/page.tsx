@@ -6,14 +6,16 @@ import { theses } from '@/data/theses';
 import { ThesisCard } from '@/components/thesis-card';
 import { ProgressDots } from '@/components/progress-dots';
 import { GpaInput } from '@/components/gpa-input';
+import { ExclusionsInput } from '@/components/exclusions-input';
 import type { AnswerValue } from '@/lib/types';
 
-type Phase = 'gpa' | 'theses';
+type Phase = 'gpa' | 'exclusions' | 'theses';
 
 export default function QuizPage() {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>('gpa');
   const [userGpa, setUserGpa] = useState<number | null>(null);
+  const [excluded, setExcluded] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<(AnswerValue | null)[]>(
     Array.from({ length: theses.length }, () => null),
@@ -24,6 +26,11 @@ export default function QuizPage() {
 
   function handleGpaSubmit(gpa: number) {
     setUserGpa(gpa);
+    setPhase('exclusions');
+  }
+
+  function handleExclusionsSubmit(list: string[]) {
+    setExcluded(list);
     setPhase('theses');
   }
 
@@ -37,15 +44,20 @@ export default function QuizPage() {
         setCurrentIndex(currentIndex + 1);
       } else {
         const encodedAnswers = encodeURIComponent(JSON.stringify(next));
-        router.push(`/results?gpa=${userGpa}&answers=${encodedAnswers}`);
+        const encodedExcluded = encodeURIComponent(JSON.stringify(excluded));
+        router.push(
+          `/results?gpa=${userGpa}&excluded=${encodedExcluded}&answers=${encodedAnswers}`,
+        );
       }
     }, 280);
   }
 
   function handleBack() {
-    if (currentIndex > 0) {
+    if (phase === 'theses' && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-    } else {
+    } else if (phase === 'theses' && currentIndex === 0) {
+      setPhase('exclusions');
+    } else if (phase === 'exclusions') {
       setPhase('gpa');
     }
   }
@@ -63,6 +75,32 @@ export default function QuizPage() {
               transition={{ duration: 0.25, ease: 'easeOut' }}
             >
               <GpaInput onSubmit={handleGpaSubmit} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </main>
+    );
+  }
+
+  if (phase === 'exclusions') {
+    return (
+      <main className="min-h-screen px-6 py-16 flex flex-col items-center">
+        <div className="w-full max-w-2xl">
+          <button
+            onClick={handleBack}
+            className="text-sm text-zinc-400 hover:text-zinc-700 cursor-pointer mb-8"
+          >
+            ← Zurück
+          </button>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key="exclusions"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+            >
+              <ExclusionsInput onSubmit={handleExclusionsSubmit} />
             </motion.div>
           </AnimatePresence>
         </div>

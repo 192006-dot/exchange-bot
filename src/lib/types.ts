@@ -19,6 +19,8 @@ export type DimensionScore = 1 | 2 | 3 | 4 | 5;
 
 export type DimensionScores = Record<Dimension, DimensionScore>;
 
+export type CitySizeTier = 'small' | 'medium' | 'big' | 'mega';
+
 export type University = {
   id: string;
   name: string;
@@ -30,6 +32,15 @@ export type University = {
   partner_levels: ('BSc' | 'MSc' | 'DD')[];
   scores: DimensionScores;
   highlights: string[];
+  // Factual attributes used by hard-filter logic.
+  eu: boolean;
+  schengen: boolean;
+  flight_hours_from_de: number;   // direct flight from Frankfurt, rounded
+  city_population_k: number;      // city proper, in thousands
+  city_size_tier: CitySizeTier;   // derived from population: <150 small, <800 medium, <3000 big, else mega
+  km_to_coast: number;            // from city center to nearest sea coast
+  km_to_mountains: number;        // from city center to nearest ≥1000m range
+  avg_summer_temp_c: number;      // mean daytime high, Jun-Aug (Dec-Feb for S. hemisphere)
 };
 
 export type Thesis = {

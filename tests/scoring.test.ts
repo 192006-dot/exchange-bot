@@ -28,6 +28,14 @@ const sampleUni: University = {
     city: 5, nature: 4, travel: 5, career: 4, adventure: 2, social: 5, easy: 4,
   },
   highlights: ['Strand', 'Party', 'BSc-stark'],
+  eu: true,
+  schengen: true,
+  flight_hours_from_de: 2,
+  city_population_k: 1600,
+  city_size_tier: 'big',
+  km_to_coast: 0,
+  km_to_mountains: 0,
+  avg_summer_temp_c: 28,
 };
 
 // Helper — compute means/shifts from a single-uni pool for deterministic tests

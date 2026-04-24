@@ -66,7 +66,7 @@ function ResultsContent() {
   const user = buildUserVector(answers, theses);
   const signal = userSignalStrength(user);
   const weakSignal = signal < 15;
-  const ranked = rankWithFilters(user, universities, gpa, excluded);
+  const ranked = rankWithFilters(user, universities, gpa, excluded, answers);
   const filteredOut = universities.length - ranked.length;
   const top = ranked[0];
   const runnerups = ranked.slice(1, 5);

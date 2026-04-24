@@ -8,6 +8,40 @@ import {
 } from './types';
 import { isReachableByGpa } from '@/data/gpa-cutoffs';
 
+/**
+ * Hard-filter mapping: specific theses encode categorical constraints (EU
+ * membership, flight duration, city size, climate, outdoor proximity) that
+ * cannot be faithfully represented in the 1-5 soft-dimension scoring. When
+ * the user agrees (value >= 1), we apply these as hard set filters.
+ *
+ * Collapse behavior: if combined hard filters yield 0 unis (user gave
+ * contradictory answers e.g. t3 + t15), the caller falls back to the
+ * pre-hard-filter set so results are never empty due to filter over-reach.
+ */
+export function applyHardFilters(
+  universities: University[],
+  answers: Answer[],
+): University[] {
+  const valOf = (id: string) =>
+    answers.find(a => a.thesisId === id)?.value ?? 0;
+  const agrees = (id: string) => valOf(id) >= 1;
+
+  let set = universities;
+  if (agrees('t1')) set = set.filter(u => u.avg_summer_temp_c >= 22);
+  if (agrees('t2')) set = set.filter(
+    u => Math.min(u.km_to_coast, u.km_to_mountains) <= 30,
+  );
+  if (agrees('t3')) set = set.filter(
+    u => u.city_size_tier === 'big' || u.city_size_tier === 'mega',
+  );
+  if (agrees('t11')) set = set.filter(u => u.eu);
+  if (agrees('t13')) set = set.filter(u => u.flight_hours_from_de <= 10);
+  if (agrees('t15')) set = set.filter(
+    u => u.city_size_tier === 'small' || u.city_size_tier === 'medium',
+  );
+  return set;
+}
+
 export type UserVector = Record<Dimension, number>;
 
 function zeroVector(): UserVector {
@@ -184,17 +218,23 @@ export function filterByExcludedCountries(
 }
 
 /**
- * Rank with both filters: GPA reachability + country exclusion.
+ * Rank with all filters: GPA reachability + country exclusion + answer-driven
+ * hard filters (EU, flight duration, city size, climate, outdoor proximity).
+ * Hard filters silently collapse to the pre-hard set if they would eliminate
+ * everything.
  */
 export function rankWithFilters(
   user: UserVector,
   universities: University[],
   userGpa: number,
   excludedCountries: string[],
+  answers: Answer[] = [],
 ): MatchResult[] {
   const gpaFiltered = universities.filter(u => isReachableByGpa(u.id, userGpa));
   const excluded = filterByExcludedCountries(gpaFiltered, excludedCountries);
-  return rankUniversities(user, excluded);
+  const hard = applyHardFilters(excluded, answers);
+  const finalSet = hard.length > 0 ? hard : excluded;
+  return rankUniversities(user, finalSet);
 }
 
 /**

@@ -28,10 +28,10 @@ export const universities: University[] = [
     country: 'Italien',
     flag: '🇮🇹',
     continent: 'europe',
-    language_of_instruction: 'mixed',
+    language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 2, english: 5, language: 3, climate: 4,
+      academic: 5, cost: 2, english: 5, language: 2, climate: 4,
       city: 5, nature: 3, travel: 5, career: 5, adventure: 2, social: 5, easy: 4,
     },
     highlights: [
@@ -890,7 +890,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 3, english: 5, language: 4, climate: 4,
+      academic: 5, cost: 3, english: 5, language: 2, climate: 4,
       city: 5, nature: 2, travel: 5, career: 5, adventure: 2, social: 5, easy: 5,
     },
     highlights: [

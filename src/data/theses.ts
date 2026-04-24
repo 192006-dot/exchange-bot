@@ -21,7 +21,7 @@ export const theses: Thesis[] = [
   },
   {
     id: 't3',
-    text: 'Ich will eine echte Großstadt mit urbaner Energie — Millionenstadt-Feeling ist ein Muss.',
+    text: 'Ich will eine echte Millionenstadt mit urbaner Energie.',
     vector: { city: 2, nature: -1, social: 1 },
   },
   {
@@ -31,12 +31,12 @@ export const theses: Thesis[] = [
   },
   {
     id: 't5',
-    text: 'Ich wähle die Uni nach Ranking und Namen — Kosten sind zweitrangig.',
+    text: 'Eine Top-Uni ist höhere Lebenshaltungskosten für mich wert.',
     vector: { academic: 2, cost: -2 },
   },
   {
     id: 't6',
-    text: 'Uni-Ranking und Prestige sind mir wichtiger als alle anderen Faktoren.',
+    text: 'Ein starkes Uni-Ranking wiegt andere Kompromisse für mich auf.',
     vector: { academic: 2, career: 2 },
   },
   {
@@ -46,7 +46,7 @@ export const theses: Thesis[] = [
   },
   {
     id: 't8',
-    text: 'Englisch als Unterrichts- und Alltagssprache ist für mich Pflicht.',
+    text: 'Unterricht auf Englisch ist Pflicht — ich will keine Landessprache büffeln.',
     vector: { english: 2, language: -2 },
   },
   {
@@ -61,17 +61,17 @@ export const theses: Thesis[] = [
   },
   {
     id: 't11',
-    text: 'EU-Land, kein Visum, keine Bürokratie — ich will es unkompliziert.',
+    text: 'Ich will es unkompliziert — EU-Raum ohne Visum.',
     vector: { easy: 2, adventure: -1 },
   },
   {
     id: 't12',
-    text: 'Ich will jedes Wochenende günstig in ein neues Land fliegen können.',
+    text: 'Günstige Wochenendtrips in Nachbarländer sind mir wichtig.',
     vector: { travel: 2, easy: 1 },
   },
   {
     id: 't13',
-    text: 'Lange Flüge (12h+) oder Jetlag sind für mich ein absolutes No-Go.',
+    text: 'Lange Interkontinentalflüge (10h+) sind für mich ein No-Go.',
     vector: { easy: 1, adventure: -2 },
   },
   {
@@ -81,7 +81,7 @@ export const theses: Thesis[] = [
   },
   {
     id: 't15',
-    text: 'Ich will eine kleine Studentenstadt, keine Großstadt-Hektik.',
+    text: 'Ich bevorzuge eine überschaubare Studentenstadt.',
     vector: { city: -2, nature: 1, easy: 1 },
   },
   {
@@ -91,7 +91,7 @@ export const theses: Thesis[] = [
   },
   {
     id: 't17',
-    text: 'Eine große internationale Exchange-Community ist mir wichtig — ich will schnell viele neue Leute kennenlernen.',
+    text: 'Eine große internationale Exchange-Community ist mir wichtig.',
     vector: { social: 2, english: 1 },
   },
   {

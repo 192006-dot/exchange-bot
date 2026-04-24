@@ -21,7 +21,7 @@ export const gpaCutoffs: Record<string, number> = {
   'nova-sbe': 8.36,
   'copenhagen-bs': 9.64,         // historical TOP: only 9.64
   'sse-stockholm': 9.0,          // estimated — elite Nordic BS, very selective
-  'essec': 5.93,
+  'essec': 7.0,                  // raised from 5.93 — top-5 Europe BS, unrealistically low
   'st-gallen': 7.29,
   'wu-vienna': 6.5,
   'trinity-dublin': 7.79,
@@ -52,14 +52,14 @@ export const gpaCutoffs: Record<string, number> = {
   'ieseg': 5.57,
   'frankfurt-school': 7.5,       // estimated — top German BS, selective
   'fu-berlin': 7.07,
-  'lmu': 5.0,
-  'mannheim': 5.64,
+  'lmu': 6.5,                    // raised from 5.0 — LMU is elite German uni (QS ~60)
+  'mannheim': 6.5,               // raised from 5.64 — top German BS
   'cologne': 6.36,
   'corvinus': 5.79,
   'cattolica': 7.5,
   'bologna': 6.5,                // estimated — good but huge partner, moderate
   'bi-norway': 7.79,
-  'nhh': 5.5,
+  'nhh': 7.0,                    // raised from 5.5 — top Nordic econ
   'catolica-lisbon': 7.86,
   'catolica-porto': 7.5,
   'ie-madrid': 9.07,
@@ -67,7 +67,7 @@ export const gpaCutoffs: Record<string, number> = {
   'autonoma-barcelona': 7.86,
   'lund': 7.71,
   'uppsala': 7.57,
-  'lausanne': 5.57,
+  'lausanne': 6.5,               // raised from 5.57 — HEC Lausanne is strong
   'zagreb': 6.21,
 
   // ========== AMERICAS BATCH ==========
@@ -93,7 +93,7 @@ export const gpaCutoffs: Record<string, number> = {
   'pacifico': 6.71,
 
   // ========== ASIA-PACIFIC BATCH ==========
-  'cuhk': 5.43,
+  'cuhk': 7.5,                   // raised from 5.43 — CUHK is QS Top-50, peer HKU/HKUST at 8+
   'hku': 8.71,
   'city-hk': 6.86,
   'fudan': 8.36,
@@ -121,7 +121,7 @@ export const gpaCutoffs: Record<string, number> = {
   'hem': 5.21,
   'bogazici': 6.71,
   'koc': 7.0,
-  'sabanci': 4.93,
+  'sabanci': 5.5,                // raised from 4.93 (below MIN_USER_GPA, filter was no-op)
   'aus-sharjah': 6.36,
 };
 

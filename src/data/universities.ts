@@ -235,10 +235,10 @@ export const universities: University[] = [
       city: 5, nature: 2, travel: 3, career: 5, adventure: 3, social: 5, easy: 2,
     },
     highlights: [
-      'NYC als Campus-Stadt',
-      'Top-10 Business School weltweit',
-      'Wall Street 5 Minuten vom Gebäude',
-      'Einzigartige Career-Opportunities',
+      'Washington Square Park direkt am Campus',
+      'Top-10 Business School weltweit (QS ~#12)',
+      'Wall Street 15 Minuten mit der U-Bahn',
+      'Einzigartige Finance-Career-Opportunities in NYC',
     ],
   },
   {
@@ -345,19 +345,19 @@ export const universities: University[] = [
     id: 'hkust',
     name: 'Hong Kong University of Science and Technology',
     city: 'Hongkong',
-    country: 'China',
+    country: 'Hongkong (SAR China)',
     flag: '🇭🇰',
     continent: 'east-asia',
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 5, cost: 2, english: 5, language: 4, climate: 5,
+      academic: 5, cost: 2, english: 5, language: 2, climate: 5,
       city: 5, nature: 4, travel: 5, career: 5, adventure: 4, social: 5, easy: 3,
     },
     highlights: [
-      'QS Top-20 weltweit',
+      'QS Top-50 weltweit (Business Top-30)',
       'Hongkong als asiatisches Finance-Center',
-      'Spektakulärer Campus mit Meerblick',
+      'Spektakulärer Campus mit Meerblick (Clear Water Bay)',
       'Career-Sprungbrett für ganz Asien',
     ],
   },
@@ -371,11 +371,11 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 3, english: 5, language: 1, climate: 5,
+      academic: 5, cost: 2, english: 5, language: 1, climate: 5,
       city: 5, nature: 5, travel: 2, career: 4, adventure: 3, social: 5, easy: 3,
     },
     highlights: [
-      'QS Top-20 Business weltweit',
+      'QS Top-20 Uni weltweit',
       'Sydney Beaches direkt erreichbar',
       'Surf- und Outdoor-Kultur',
       'Englischsprachig bei totaler Szenerie-Änderung',
@@ -614,7 +614,7 @@ export const universities: University[] = [
   },
   {
     id: 'sciences-po',
-    name: 'SciencesPo',
+    name: 'Sciences Po',
     city: 'Paris',
     country: 'Frankreich',
     flag: '🇫🇷',
@@ -641,7 +641,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 3, english: 5, language: 4, climate: 3,
+      academic: 4, cost: 3, english: 5, language: 2, climate: 3,
       city: 5, nature: 2, travel: 5, career: 5, adventure: 2, social: 5, easy: 5,
     },
     highlights: [
@@ -1029,13 +1029,13 @@ export const universities: University[] = [
     },
     highlights: [
       'Top-20 US Business School',
-      'Atlanta als warm Südstaat-Metropole',
-      'Coca-Cola, CNN, Delta direkt im Alumni-Netzwerk',
+      'Atlanta als warme Südstaat-Metropole',
+      'Coca-Cola, Delta, UPS, Home Depot direkt im Alumni-Netzwerk',
     ],
   },
   {
     id: 'purdue-krannert',
-    name: 'Purdue University, Krannert School',
+    name: 'Purdue University, Mitchell E. Daniels, Jr. School of Business',
     city: 'West Lafayette',
     country: 'USA',
     flag: '🇺🇸',
@@ -1149,8 +1149,8 @@ export const universities: University[] = [
   },
   {
     id: 'uc-berkeley',
-    name: 'University of California (all campuses)',
-    city: 'Berkeley / Los Angeles',
+    name: 'University of California, Berkeley (Haas)',
+    city: 'Berkeley',
     country: 'USA',
     flag: '🇺🇸',
     continent: 'north-america',
@@ -1158,12 +1158,13 @@ export const universities: University[] = [
     partner_levels: ['BSc'],
     scores: {
       academic: 5, cost: 1, english: 5, language: 1, climate: 5,
-      city: 5, nature: 5, travel: 2, career: 5, adventure: 3, social: 5, easy: 2,
+      city: 5, nature: 5, travel: 3, career: 5, adventure: 3, social: 5, easy: 2,
     },
     highlights: [
       'Top-10 Public-Uni weltweit',
-      'Kalifornien-Klima und Silicon-Valley-Nähe',
-      'Berkeley mit coolem Studenten-Vibe',
+      'Bay Area — Silicon Valley 40 Min entfernt',
+      'San Francisco als vibrante Metropole direkt über die Bay',
+      'Haas School of Business mit starkem Tech-/Finance-Pipeline',
     ],
   },
   {
@@ -1264,7 +1265,7 @@ export const universities: University[] = [
   {
     id: 'simon-fraser',
     name: 'Simon Fraser University, Beedie School',
-    city: 'Vancouver',
+    city: 'Burnaby / Vancouver',
     country: 'Kanada',
     flag: '🇨🇦',
     continent: 'north-america',
@@ -1367,7 +1368,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 4, english: 3, language: 5, climate: 3,
+      academic: 4, cost: 4, english: 3, language: 5, climate: 2,
       city: 4, nature: 4, travel: 3, career: 3, adventure: 5, social: 3, easy: 2,
     },
     highlights: [
@@ -1386,7 +1387,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 4, english: 3, language: 5, climate: 4,
+      academic: 4, cost: 4, english: 3, language: 5, climate: 3,
       city: 4, nature: 4, travel: 3, career: 3, adventure: 5, social: 3, easy: 2,
     },
     highlights: [
@@ -1400,13 +1401,13 @@ export const universities: University[] = [
     id: 'cuhk',
     name: 'Chinese University of Hong Kong',
     city: 'Hongkong',
-    country: 'China',
+    country: 'Hongkong (SAR China)',
     flag: '🇭🇰',
     continent: 'east-asia',
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 5, cost: 2, english: 5, language: 5, climate: 5,
+      academic: 5, cost: 2, english: 5, language: 2, climate: 5,
       city: 5, nature: 4, travel: 5, career: 5, adventure: 4, social: 5, easy: 3,
     },
     highlights: [
@@ -1419,13 +1420,13 @@ export const universities: University[] = [
     id: 'hku',
     name: 'The University of Hong Kong',
     city: 'Hongkong',
-    country: 'China',
+    country: 'Hongkong (SAR China)',
     flag: '🇭🇰',
     continent: 'east-asia',
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 5, cost: 2, english: 5, language: 4, climate: 5,
+      academic: 5, cost: 2, english: 5, language: 2, climate: 5,
       city: 5, nature: 3, travel: 5, career: 5, adventure: 4, social: 5, easy: 3,
     },
     highlights: [
@@ -1438,13 +1439,13 @@ export const universities: University[] = [
     id: 'city-hk',
     name: 'City University of Hong Kong',
     city: 'Hongkong',
-    country: 'China',
+    country: 'Hongkong (SAR China)',
     flag: '🇭🇰',
     continent: 'east-asia',
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 2, english: 5, language: 4, climate: 5,
+      academic: 4, cost: 2, english: 5, language: 2, climate: 5,
       city: 5, nature: 3, travel: 5, career: 4, adventure: 4, social: 5, easy: 3,
     },
     highlights: [
@@ -1577,7 +1578,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 2, english: 4, language: 5, climate: 4,
+      academic: 4, cost: 2, english: 3, language: 5, climate: 4,
       city: 5, nature: 3, travel: 4, career: 4, adventure: 5, social: 4, easy: 3,
     },
     highlights: [
@@ -1710,7 +1711,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 3, english: 5, language: 1, climate: 4,
+      academic: 5, cost: 2, english: 5, language: 1, climate: 4,
       city: 5, nature: 4, travel: 2, career: 4, adventure: 3, social: 5, easy: 3,
     },
     highlights: [
@@ -1729,13 +1730,13 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 5, cost: 3, english: 5, language: 1, climate: 5,
+      academic: 5, cost: 2, english: 5, language: 1, climate: 5,
       city: 5, nature: 5, travel: 2, career: 5, adventure: 3, social: 5, easy: 3,
     },
     highlights: [
-      'Älteste Uni Australiens',
+      'Älteste Uni Australiens (1850)',
       'Sydney-Beaches und Harbour-Lifestyle',
-      'Top-Ranked BS Pazifik-Region',
+      'Top-Business-School in Australien',
     ],
   },
   {
@@ -1778,7 +1779,7 @@ export const universities: University[] = [
   },
   {
     id: 'auckland-tech',
-    name: 'AUT University, Business School',
+    name: 'Auckland University of Technology (AUT)',
     city: 'Auckland',
     country: 'Neuseeland',
     flag: '🇳🇿',
@@ -1825,7 +1826,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 5, english: 4, language: 4, climate: 5,
+      academic: 4, cost: 5, english: 3, language: 4, climate: 5,
       city: 5, nature: 3, travel: 4, career: 3, adventure: 5, social: 4, easy: 2,
     },
     highlights: [
@@ -1863,7 +1864,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 4, english: 4, language: 4, climate: 4,
+      academic: 4, cost: 4, english: 3, language: 4, climate: 4,
       city: 5, nature: 3, travel: 5, career: 3, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1882,7 +1883,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 4, english: 4, language: 4, climate: 4,
+      academic: 5, cost: 4, english: 3, language: 4, climate: 4,
       city: 5, nature: 3, travel: 5, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1901,7 +1902,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 4, english: 4, language: 4, climate: 4,
+      academic: 4, cost: 4, english: 3, language: 4, climate: 4,
       city: 5, nature: 3, travel: 5, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1920,7 +1921,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 2, english: 4, language: 3, climate: 3,
+      academic: 4, cost: 3, english: 4, language: 3, climate: 5,
       city: 5, nature: 2, travel: 5, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [

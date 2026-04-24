@@ -22,7 +22,7 @@ export const theses: Thesis[] = [
   {
     id: 't3',
     text: 'Ich brauche eine richtige Metropole mit 2+ Millionen Einwohnern.',
-    vector: { city: 2, nature: -1, social: 1 },
+    vector: { city: 2, nature: -1, social: 1, travel: 1 },
   },
   {
     id: 't4',
@@ -62,7 +62,7 @@ export const theses: Thesis[] = [
   {
     id: 't11',
     text: 'EU-Land, kein Visum, keine Bürokratie — ich will es unkompliziert.',
-    vector: { easy: 2, adventure: -1 },
+    vector: { easy: 2, adventure: -1, travel: 1 },
   },
   {
     id: 't12',

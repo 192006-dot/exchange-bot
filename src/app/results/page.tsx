@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { universities } from '@/data/universities';
 import { theses } from '@/data/theses';
-import { buildUserVector, rankWithFilters } from '@/lib/scoring';
+import { buildUserVector, rankWithFilters, userSignalStrength } from '@/lib/scoring';
 import { UniversityHero } from '@/components/university-hero';
 import { UniversityRow } from '@/components/university-row';
 import { NavTop } from '@/components/nav-top';
@@ -50,6 +50,8 @@ function ResultsContent() {
     .filter((a): a is Answer => a !== null);
 
   const user = buildUserVector(answers, theses);
+  const signal = userSignalStrength(user);
+  const weakSignal = signal < 8; // below ~8 total user-vector magnitude → too neutral to rank meaningfully
   const ranked = rankWithFilters(user, universities, gpa, excluded);
   const filteredOut = universities.length - ranked.length;
   const top = ranked[0];
@@ -69,6 +71,15 @@ function ResultsContent() {
             {excluded.length > 0 && ` · ${excluded.length} Länder ausgeschlossen`}
           </p>
         </div>
+
+        {weakSignal && (
+          <div className="mb-6 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-900 leading-relaxed">
+            Du hast viele Thesen neutral beantwortet — die Empfehlung ist dadurch weniger präzise.
+            <Link href="/quiz" className="ml-2 underline font-medium">
+              Nochmal stärker antworten
+            </Link>
+          </div>
+        )}
 
         {top ? (
           <UniversityHero result={top} />

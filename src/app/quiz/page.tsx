@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { theses } from '@/data/theses';
 import { ThesisCard } from '@/components/thesis-card';
 import { ProgressDots } from '@/components/progress-dots';
@@ -53,11 +54,21 @@ export default function QuizPage() {
         <p className="text-xs uppercase tracking-widest text-zinc-400 mb-3">
           These {currentIndex + 1} von {theses.length}
         </p>
-        <ThesisCard
-          thesis={currentThesis}
-          selected={currentSelected}
-          onSelect={handleSelect}
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+          >
+            <ThesisCard
+              thesis={currentThesis}
+              selected={currentSelected}
+              onSelect={handleSelect}
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </main>
   );

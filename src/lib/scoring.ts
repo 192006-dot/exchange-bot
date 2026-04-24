@@ -6,6 +6,7 @@ import {
   type Thesis,
   type University,
 } from './types';
+import { isReachableByGpa } from '@/data/gpa-cutoffs';
 
 export type UserVector = Record<Dimension, number>;
 
@@ -60,4 +61,16 @@ export function rankUniversities(user: UserVector, universities: University[]): 
       topReasons: topReasons(user, u),
     }))
     .sort((a, b) => b.percent - a.percent);
+}
+
+/**
+ * Rank + filter by user GPA. Unis below user's reachable threshold are dropped.
+ */
+export function rankReachableUniversities(
+  user: UserVector,
+  universities: University[],
+  userGpa: number,
+): MatchResult[] {
+  const reachable = universities.filter(u => isReachableByGpa(u.id, userGpa));
+  return rankUniversities(user, reachable);
 }

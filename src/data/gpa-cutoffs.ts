@@ -1,12 +1,16 @@
 /**
- * Minimum observed GPA per partner university, based on historical Maastricht
- * exchange placement data (~12 pages PDF scan, ~400 student-uni pairs).
+ * Minimum GPA per partner university.
  *
- * Interpretation: The historical lowest GPA at which a student got this uni.
- * If user_gpa < cutoff - 0.2 → filter out (uni likely unreachable).
+ * Two sources:
+ * 1. Historical data — from Maastricht exchange placement PDF (~400 entries).
+ *    These are the observed minimum GPAs of students who actually got that uni.
+ * 2. Estimated — for unis NOT in the historical data but clearly selective
+ *    based on prestige, ranking, and known partner-selectivity patterns.
+ *    These are flagged with a comment and tend to be conservative (biased high).
  *
- * Unis NOT in this map had zero historical placements in the data — treat as
- * "no historical data" (keep reachable at any GPA).
+ * Interpretation: If user_gpa < cutoff - 0.2 → filter out (uni unreachable).
+ *
+ * Unis with no entry at all = no cutoff = always reachable (low-competition unis).
  */
 
 export const gpaCutoffs: Record<string, number> = {
@@ -15,50 +19,50 @@ export const gpaCutoffs: Record<string, number> = {
   'bocconi': 7.5,
   'luiss': 7.64,
   'nova-sbe': 8.36,
-  'copenhagen-bs': 9.64,         // TOP: only 9.64 in data
-  // 'sse-stockholm': not in data — null
+  'copenhagen-bs': 9.64,         // historical TOP: only 9.64
+  'sse-stockholm': 9.0,          // estimated — elite Nordic BS, very selective
   'essec': 5.93,
   'st-gallen': 7.29,
   'wu-vienna': 6.5,
   'trinity-dublin': 7.79,
-  // 'aston': not in data — null
-  // 'nyu-stern': not in data — null
+  'aston': 6.5,                  // estimated — mid-tier UK
+  'nyu-stern': 8.5,              // estimated — user-provided: NYU Stern requires 8.5+
   'michigan-ross': 8.07,
   'hec-montreal': 8.64,
   'fgv-sao-paulo': 5.79,
   'puc-chile': 5.64,
   'nus': 7.71,
   'hkust': 8.07,
-  'unsw': 9.64,                  // TOP: only 9.64
-  'stellenbosch': 9.07,          // TOP: 9.64, 9.07
+  'unsw': 9.64,                  // historical TOP
+  'stellenbosch': 9.07,          // historical TOP
 
   // ========== EUROPE BATCH ==========
   'innsbruck': 5.86,
   'antwerpen': 6.14,
-  // 'uclouvain': not in data — null
+  'uclouvain': 6.5,              // estimated — good Belgian, moderate selectivity
   'hec-liege': 6.57,
   'ku-leuven': 6.86,
   'charles-prague': 7.07,
-  // 'aarhus': not in data — null
+  'aarhus': 7.5,                 // estimated — strong Danish BS
   'aalto': 6.14,
   'hanken': 7.21,
   'edhec': 5.93,
   'em-lyon': 5.64,
-  // 'sciences-po': not in data — null
+  'sciences-po': 8.0,            // estimated — elite FR institute
   'ieseg': 5.57,
-  // 'frankfurt-school': not in data — null
+  'frankfurt-school': 7.5,       // estimated — top German BS, selective
   'fu-berlin': 7.07,
   'lmu': 5.0,
   'mannheim': 5.64,
   'cologne': 6.36,
   'corvinus': 5.79,
   'cattolica': 7.5,
-  // 'bologna': not in data — null
+  'bologna': 6.5,                // estimated — good but huge partner, moderate
   'bi-norway': 7.79,
   'nhh': 5.5,
   'catolica-lisbon': 7.86,
   'catolica-porto': 7.5,
-  'ie-madrid': 9.07,             // VERY HIGH
+  'ie-madrid': 9.07,
   'carlos-iii': 7.79,
   'autonoma-barcelona': 7.86,
   'lund': 7.71,
@@ -67,23 +71,23 @@ export const gpaCutoffs: Record<string, number> = {
   'zagreb': 6.21,
 
   // ========== AMERICAS BATCH ==========
-  // 'emory-goizueta': not in data — null
-  // 'purdue-krannert': not in data — null
+  'emory-goizueta': 8.0,         // estimated — top-20 US BS
+  'purdue-krannert': 7.5,        // estimated — top-50 US BS
   'texas-am': 7.64,
-  // 'wisconsin-madison': not in data — null
+  'wisconsin-madison': 7.5,      // estimated — top US public
   'tulane': 8.5,
-  // 'george-washington': not in data — null
+  'george-washington': 7.5,      // estimated — good US in D.C.
   'minnesota-carlson': 7.71,
-  'uc-berkeley': 9.43,           // VERY HIGH: 9.64, 9.57, 9.43
-  // 'florida-warrington': not in data — null
+  'uc-berkeley': 9.43,           // historical VERY HIGH
+  'florida-warrington': 6.5,     // estimated — moderate US
   'queens-smith': 7.93,
-  // 'western-ivey': not in data — null
-  // 'uqam': not in data — null
+  'western-ivey': 8.5,           // estimated — top Canadian BS, very selective
+  'uqam': 6.0,                   // estimated — French-speaking, less competitive
   'laval': 5.93,
   'simon-fraser': 8.93,
   'itam': 8.29,
-  // 'tec-monterrey': not in data — null
-  // 'insper': not in data — null
+  'tec-monterrey': 7.0,          // estimated — top Mexican BS
+  'insper': 7.0,                 // estimated — modern Brazilian elite BS
   'uba': 5.5,
   'los-andes': 6.0,
   'pacifico': 6.71,
@@ -93,27 +97,27 @@ export const gpaCutoffs: Record<string, number> = {
   'hku': 8.71,
   'city-hk': 6.86,
   'fudan': 8.36,
-  // 'peking-guanghua': not in data — null
-  // 'sjtu-antai': not in data — null
-  // 'renmin': not in data — null
+  'peking-guanghua': 8.5,        // estimated — elite Chinese, very selective
+  'sjtu-antai': 8.0,             // estimated — top Chinese
+  'renmin': 7.5,                 // estimated — good Chinese
   'ntu-singapore': 7.07,
   'smu-singapore': 7.79,
   'icu-japan': 7.57,
-  // 'yonsei': not in data — null
+  'yonsei': 8.0,                 // estimated — elite Korean (SKY group)
   'korea-university': 8.57,
-  'snu': 9.29,                   // HIGH
+  'snu': 9.29,
   'sogang': 8.29,
   'chulalongkorn': 8.14,
   'thammasat': 8.21,
-  'monash': 9.21,                // HIGH
-  'sydney-uni': 9.57,            // VERY HIGH
+  'monash': 9.21,
+  'sydney-uni': 9.57,
   'anu': 8.21,
-  'uq-brisbane': 9.36,           // HIGH
-  // 'auckland-tech': not in data — null
-  // 'waikato': not in data — null
+  'uq-brisbane': 9.36,
+  'auckland-tech': 6.0,          // estimated — moderate NZ BS
+  'waikato': 5.5,                // estimated — smaller NZ BS
 
   // ========== AFRICA/ME BATCH ==========
-  // 'au-cairo': not in data — null
+  'au-cairo': 6.5,               // estimated — English-taught Egyptian
   'hem': 5.21,
   'bogazici': 6.71,
   'koc': 7.0,

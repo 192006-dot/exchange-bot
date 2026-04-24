@@ -1,22 +1,32 @@
 /**
  * Run: npx tsx scripts/simulate-gpa.ts
  * Shows how GPA filter changes results for the same persona.
+ * Updated for 20-thesis set.
  */
 import { theses } from '../src/data/theses';
 import { universities } from '../src/data/universities';
 import { buildUserVector, rankReachableUniversities } from '../src/lib/scoring';
 import type { Answer, AnswerValue } from '../src/lib/types';
 
-// Academic-Elitist persona (wants top-ranked, career, English)
+// Academic-Elitist persona (wants top-ranked, career, English, prestige)
 const answers: Record<string, AnswerValue> = {
-  t1: 0, t2: 1, t3: 2, t4: -1, t5: -2, t6: 0, t7: -1,
-  t8: 0, t9: 1, t10: -1, t11: 2, t12: 2, t13: 1,
+  t3: 1,   // metropolis yes
+  t4: -2,  // budget low no
+  t5: 2,   // top-uni YES
+  t6: 2,   // prestige YES
+  t7: -2,  // chill no
+  t8: 2,   // english YES
+  t9: -1,  // new language no
+  t14: 0,  // nightlife neutral
+  t17: 1,  // int community yes
+  t18: 2,  // internship offers YES
+  t19: 1,  // culture yes
 };
 
-const gpaScenarios = [6.5, 7.5, 8.5, 9.5];
+const gpaScenarios = [6.5, 7.5, 8.0, 8.5, 9.5];
 
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('Same persona (Academic-Elitist) at different GPAs');
+console.log('Academic-Elitist persona at different GPAs');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
 for (const gpa of gpaScenarios) {

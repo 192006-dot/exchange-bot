@@ -7,6 +7,7 @@ import { theses } from '@/data/theses';
 import { buildUserVector, rankWithFilters } from '@/lib/scoring';
 import { UniversityHero } from '@/components/university-hero';
 import { UniversityRow } from '@/components/university-row';
+import { NavTop } from '@/components/nav-top';
 import type { Answer, AnswerValue } from '@/lib/types';
 import { MAX_USER_GPA, MIN_USER_GPA } from '@/data/gpa-cutoffs';
 
@@ -55,9 +56,10 @@ function ResultsContent() {
   const runnerups = ranked.slice(1, 5);
 
   return (
-    <main className="min-h-screen px-6 py-16">
+    <main className="min-h-screen px-6 pb-16">
       <div className="max-w-2xl mx-auto">
-        <div className="flex items-baseline justify-between mb-6">
+        <NavTop />
+        <div className="flex items-baseline justify-between mt-10 mb-6">
           <p className="text-xs uppercase tracking-widest text-zinc-500 font-semibold">
             Dein Top-Match
           </p>
@@ -95,8 +97,8 @@ function ResultsContent() {
         )}
 
         <div className="mt-12 text-center">
-          <Link href="/quiz" className="text-sm text-zinc-500 hover:text-zinc-900 underline">
-            Nochmal machen
+          <Link href="/" className="text-sm text-zinc-500 hover:text-zinc-900 underline">
+            Nochmal
           </Link>
         </div>
       </div>

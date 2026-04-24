@@ -7,6 +7,7 @@ import { ThesisCard } from '@/components/thesis-card';
 import { ProgressDots } from '@/components/progress-dots';
 import { GpaInput } from '@/components/gpa-input';
 import { ExclusionsInput } from '@/components/exclusions-input';
+import { NavTop } from '@/components/nav-top';
 import type { AnswerValue } from '@/lib/types';
 
 type Phase = 'gpa' | 'exclusions' | 'theses';
@@ -64,19 +65,22 @@ export default function QuizPage() {
 
   if (phase === 'gpa') {
     return (
-      <main className="min-h-screen px-6 py-16 flex flex-col items-center">
+      <main className="min-h-screen px-6 pb-16 flex flex-col items-center">
         <div className="w-full max-w-2xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key="gpa"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-            >
-              <GpaInput onSubmit={handleGpaSubmit} />
-            </motion.div>
-          </AnimatePresence>
+          <NavTop />
+          <div className="mt-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key="gpa"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+              >
+                <GpaInput onSubmit={handleGpaSubmit} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </main>
     );
@@ -84,11 +88,12 @@ export default function QuizPage() {
 
   if (phase === 'exclusions') {
     return (
-      <main className="min-h-screen px-6 py-16 flex flex-col items-center">
+      <main className="min-h-screen px-6 pb-16 flex flex-col items-center">
         <div className="w-full max-w-2xl">
+          <NavTop />
           <button
             onClick={handleBack}
-            className="text-sm text-zinc-400 hover:text-zinc-700 cursor-pointer mb-8"
+            className="mt-6 text-sm text-zinc-400 hover:text-zinc-700 cursor-pointer mb-6"
           >
             ← Zurück
           </button>
@@ -109,9 +114,10 @@ export default function QuizPage() {
   }
 
   return (
-    <main className="min-h-screen px-6 py-10 flex flex-col items-center">
+    <main className="min-h-screen px-6 pb-10 flex flex-col items-center">
       <div className="w-full max-w-2xl">
-        <div className="flex items-center gap-4 mb-12">
+        <NavTop />
+        <div className="flex items-center gap-4 mt-8 mb-12">
           <button
             onClick={handleBack}
             className="text-sm text-zinc-400 hover:text-zinc-700 cursor-pointer"

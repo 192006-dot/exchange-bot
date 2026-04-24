@@ -71,6 +71,12 @@ function ResultsContent() {
   const top = ranked[0];
   const runnerups = ranked.slice(1, 5);
 
+  // Encode current Results URL so Detail pages can link back to it
+  // (preserves answers + excluded state on return)
+  const backQuery = encodeURIComponent(`/results?${params.toString()}`);
+  const detailHref = (uniId: string) =>
+    `/uni/${uniId}?gpa=${gpa.toFixed(2)}&back=${backQuery}`;
+
   if (!top) {
     return (
       <main className="min-h-screen px-6 pb-16">
@@ -202,7 +208,7 @@ function ResultsContent() {
           <ActionBar
             uni={top.university}
             matchPercent={top.percent}
-            detailHref={`/uni/${top.university.id}?gpa=${gpa.toFixed(2)}`}
+            detailHref={detailHref(top.university.id)}
           />
         </div>
 
@@ -221,7 +227,7 @@ function ResultsContent() {
               {runnerups.map((r, i) => (
                 <Link
                   key={r.university.id}
-                  href={`/uni/${r.university.id}?gpa=${gpa.toFixed(2)}`}
+                  href={detailHref(r.university.id)}
                   className="block"
                 >
                   <UniversityRow rank={i + 2} result={r} userGpa={gpa} />

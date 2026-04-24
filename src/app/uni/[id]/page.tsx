@@ -58,7 +58,7 @@ const SAFETY_BANNER_STYLES: Record<string, string> = {
 
 export default async function UniDetailPage({ params, searchParams }: Props) {
   const { id } = await params;
-  const { gpa: gpaStr } = await searchParams;
+  const { gpa: gpaStr, back: backParam } = await searchParams;
   const uni = universities.find(u => u.id === id);
   if (!uni) notFound();
 
@@ -66,7 +66,14 @@ export default async function UniDetailPage({ params, searchParams }: Props) {
   const hasGpa = !Number.isNaN(gpa);
   const safety = hasGpa ? getGpaSafety(gpa, uni.id) : null;
   const cutoff = gpaCutoffs[uni.id];
-  const backHref = hasGpa ? `/results?gpa=${gpa.toFixed(2)}` : '/';
+
+  // Use the `back` param if it's a safe same-origin path; otherwise
+  // fall back to a best-effort results URL or homepage.
+  const safeBack =
+    backParam && backParam.startsWith('/') && !backParam.startsWith('//')
+      ? backParam
+      : null;
+  const backHref = safeBack ?? (hasGpa ? `/results?gpa=${gpa.toFixed(2)}` : '/');
 
   const allDims: Dimension[] = [
     'academic', 'career', 'social', 'city', 'nature', 'climate',

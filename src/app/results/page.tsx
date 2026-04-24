@@ -13,7 +13,6 @@ import { NavTop } from '@/components/nav-top';
 import { RadarChart } from '@/components/radar-chart';
 import { CompareGrid } from '@/components/compare-grid';
 import { ActionBar } from '@/components/action-bar';
-import { WhatIfPanel } from '@/components/what-if-panel';
 import type { Answer, AnswerValue } from '@/lib/types';
 import { MAX_USER_GPA, MIN_USER_GPA } from '@/data/gpa-cutoffs';
 
@@ -200,7 +199,11 @@ function ResultsContent() {
             </div>
           </div>
 
-          <ActionBar uni={top.university} matchPercent={top.percent} />
+          <ActionBar
+            uni={top.university}
+            matchPercent={top.percent}
+            detailHref={`/uni/${top.university.id}?gpa=${gpa.toFixed(2)}`}
+          />
         </div>
 
         {/* Runner-ups */}
@@ -216,12 +219,13 @@ function ResultsContent() {
             </div>
             <div className="space-y-2.5">
               {runnerups.map((r, i) => (
-                <UniversityRow
+                <Link
                   key={r.university.id}
-                  rank={i + 2}
-                  result={r}
-                  userGpa={gpa}
-                />
+                  href={`/uni/${r.university.id}?gpa=${gpa.toFixed(2)}`}
+                  className="block"
+                >
+                  <UniversityRow rank={i + 2} result={r} userGpa={gpa} />
+                </Link>
               ))}
             </div>
           </>
@@ -238,25 +242,6 @@ function ResultsContent() {
             <CompareGrid results={ranked} userGpa={gpa} />
           </>
         )}
-
-        {/* What-If Panel */}
-        <div className="mt-12 bg-white rounded-3xl border border-zinc-200 p-6 md:p-8">
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold tracking-[-0.01em] text-zinc-950">
-              Was wäre wenn …
-            </h3>
-            <p className="text-[13px] text-zinc-500 mt-1">
-              Slide eine These, schau wie sich das Ranking live ändert.
-            </p>
-          </div>
-          <WhatIfPanel
-            initialAnswers={values}
-            userGpa={gpa}
-            excluded={excluded}
-            originalTopId={top.university.id}
-            originalTopName={top.university.name}
-          />
-        </div>
 
         <div className="mt-16 text-center">
           <Link

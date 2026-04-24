@@ -1,17 +1,16 @@
 'use client';
+import Link from 'next/link';
 import { useState } from 'react';
-import { Download, Link2, Mail, Check } from 'lucide-react';
+import { Download, Link2, Mail, Check, ArrowRight } from 'lucide-react';
 import type { University } from '@/lib/types';
-
-const SBE_EXCHANGE_URL =
-  'https://www.maastrichtuniversity.nl/support/during-your-studies/exchange-opportunities/outgoing-exchange';
 
 type Props = {
   uni: University;
   matchPercent: number;
+  detailHref: string;
 };
 
-export function ActionBar({ uni, matchPercent }: Props) {
+export function ActionBar({ uni, matchPercent, detailHref }: Props) {
   const [copied, setCopied] = useState(false);
 
   function onCopyLink() {
@@ -33,16 +32,13 @@ export function ActionBar({ uni, matchPercent }: Props) {
 
   return (
     <div className="px-6 md:px-10 py-5 flex flex-wrap items-center justify-between gap-3 bg-zinc-50 border-t border-zinc-200">
-      <div className="flex flex-wrap gap-2.5">
-        <a
-          href={SBE_EXCHANGE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-zinc-950 text-white px-5 h-10 rounded-full text-[13px] font-medium hover:bg-zinc-800 transition"
-        >
-          Bewerben auf SBE-Portal →
-        </a>
-      </div>
+      <Link
+        href={detailHref}
+        className="inline-flex items-center gap-2 bg-zinc-950 text-white px-5 h-10 rounded-full text-[13px] font-medium hover:bg-zinc-800 transition"
+      >
+        Details ansehen
+        <ArrowRight className="h-3.5 w-3.5" />
+      </Link>
       <div className="flex gap-1">
         <button
           onClick={onPdf}

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { universities } from '@/data/universities';
 import { theses } from '@/data/theses';
+import { WorldMap } from '@/components/world-map';
 
 const uniCount = universities.length;
 const thesisCount = theses.length;
@@ -204,7 +205,7 @@ export default function Home() {
           </div>
 
           <div className="rounded-3xl overflow-hidden border border-zinc-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
-            <WorldMapPreview />
+            <WorldMap />
             <div className="bg-white p-6 md:p-8 border-t border-zinc-200">
               <div className="flex flex-wrap gap-2">
                 {CONTINENT_COUNTS.map(c => (
@@ -365,101 +366,3 @@ function Step({
   );
 }
 
-function WorldMapPreview() {
-  // Stylized world map using absolutely-positioned dots that roughly suggest continents.
-  // Coordinates are approximate relative positions (left%, top%).
-  const pins: { left: string; top: string; size: number; opacity: number }[] = [
-    // Europe cluster
-    { left: '45%', top: '28%', size: 8, opacity: 0.9 },
-    { left: '47%', top: '30%', size: 6, opacity: 0.7 },
-    { left: '49%', top: '32%', size: 7, opacity: 0.85 },
-    { left: '51%', top: '30%', size: 5, opacity: 0.6 },
-    { left: '46%', top: '33%', size: 6, opacity: 0.8 },
-    { left: '50%', top: '35%', size: 7, opacity: 0.75 },
-    { left: '44%', top: '31%', size: 5, opacity: 0.65 },
-    { left: '48%', top: '36%', size: 6, opacity: 0.7 },
-    // North America
-    { left: '21%', top: '32%', size: 9, opacity: 0.85 },
-    { left: '18%', top: '30%', size: 7, opacity: 0.7 },
-    { left: '24%', top: '37%', size: 6, opacity: 0.75 },
-    { left: '15%', top: '28%', size: 5, opacity: 0.6 },
-    // Latin America
-    { left: '28%', top: '58%', size: 7, opacity: 0.8 },
-    { left: '30%', top: '65%', size: 6, opacity: 0.7 },
-    { left: '26%', top: '70%', size: 5, opacity: 0.65 },
-    // East Asia
-    { left: '78%', top: '35%', size: 8, opacity: 0.9 },
-    { left: '82%', top: '38%', size: 7, opacity: 0.85 },
-    { left: '75%', top: '40%', size: 6, opacity: 0.75 },
-    { left: '85%', top: '42%', size: 5, opacity: 0.65 },
-    // SE Asia
-    { left: '80%', top: '55%', size: 6, opacity: 0.8 },
-    // Australasia
-    { left: '88%', top: '75%', size: 8, opacity: 0.85 },
-    { left: '92%', top: '78%', size: 6, opacity: 0.7 },
-    // Africa & ME
-    { left: '55%', top: '50%', size: 6, opacity: 0.7 },
-    { left: '52%', top: '60%', size: 5, opacity: 0.65 },
-    { left: '53%', top: '75%', size: 6, opacity: 0.75 },
-    { left: '62%', top: '42%', size: 5, opacity: 0.65 },
-  ];
-
-  return (
-    <div className="relative h-[440px] bg-gradient-to-b from-zinc-50 to-zinc-100 overflow-hidden">
-      {/* faint continent tinted regions */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          backgroundImage: [
-            // North America blob
-            'radial-gradient(ellipse 16% 18% at 20% 32%, rgba(0,0,0,0.06), transparent 70%)',
-            // Europe
-            'radial-gradient(ellipse 8% 10% at 48% 30%, rgba(0,0,0,0.06), transparent 70%)',
-            // Africa
-            'radial-gradient(ellipse 10% 18% at 54% 58%, rgba(0,0,0,0.06), transparent 70%)',
-            // Asia
-            'radial-gradient(ellipse 18% 16% at 78% 38%, rgba(0,0,0,0.06), transparent 70%)',
-            // Latin America
-            'radial-gradient(ellipse 8% 14% at 28% 62%, rgba(0,0,0,0.06), transparent 70%)',
-            // Australia
-            'radial-gradient(ellipse 10% 8% at 88% 75%, rgba(0,0,0,0.06), transparent 70%)',
-          ].join(', '),
-        }}
-      />
-      {/* grid dots as subtle texture */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px)',
-          backgroundSize: '16px 16px',
-        }}
-      />
-      {/* uni pins */}
-      {pins.map((p, i) => (
-        <span
-          key={i}
-          className="absolute rounded-full bg-emerald-500"
-          style={{
-            left: p.left,
-            top: p.top,
-            width: `${p.size}px`,
-            height: `${p.size}px`,
-            opacity: p.opacity,
-            boxShadow: `0 0 0 ${Math.max(2, p.size / 2)}px rgba(16,185,129,${p.opacity * 0.2})`,
-            transform: 'translate(-50%, -50%)',
-          }}
-        />
-      ))}
-      {/* overlay label */}
-      <div className="absolute top-10 left-10 max-w-sm">
-        <h3 className="text-3xl font-bold tracking-[-0.02em] text-zinc-950 mb-2">Weltkarte</h3>
-        <p className="text-[15px] text-zinc-600">
-          Interaktiver Atlas mit allen {uniCount} Partner-Unis. Pin-Farbe zeigt dein Match-%.
-        </p>
-      </div>
-    </div>
-  );
-}

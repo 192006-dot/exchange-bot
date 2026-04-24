@@ -42,3 +42,6 @@ next-env.d.ts
 
 # brainstorming workspace (visual companion state)
 /.superpowers/
+
+# playwright MCP screenshots / snapshots
+/.playwright-mcp/

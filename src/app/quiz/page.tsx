@@ -90,24 +90,20 @@ export default function QuizPage() {
     return (
       <main className="min-h-screen px-6 pb-16 flex flex-col items-center">
         <div className="w-full max-w-2xl">
-          <NavTop />
-          <button
-            onClick={handleBack}
-            className="mt-6 text-sm text-zinc-400 hover:text-zinc-700 cursor-pointer mb-6"
-          >
-            ← Zurück
-          </button>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key="exclusions"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-            >
-              <ExclusionsInput onSubmit={handleExclusionsSubmit} />
-            </motion.div>
-          </AnimatePresence>
+          <NavTop onBack={handleBack} />
+          <div className="mt-6">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key="exclusions"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+              >
+                <ExclusionsInput onSubmit={handleExclusionsSubmit} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </main>
     );
@@ -116,17 +112,9 @@ export default function QuizPage() {
   return (
     <main className="min-h-screen px-6 pb-10 flex flex-col items-center">
       <div className="w-full max-w-2xl">
-        <NavTop />
-        <div className="flex items-center gap-4 mt-8 mb-12">
-          <button
-            onClick={handleBack}
-            className="text-sm text-zinc-400 hover:text-zinc-700 cursor-pointer"
-          >
-            ← Zurück
-          </button>
-          <div className="flex-1">
-            <ProgressDots total={theses.length} currentIndex={currentIndex} />
-          </div>
+        <NavTop onBack={handleBack} />
+        <div className="mt-8 mb-12">
+          <ProgressDots total={theses.length} currentIndex={currentIndex} />
         </div>
         <p className="text-xs uppercase tracking-widest text-zinc-400 mb-3">
           These {currentIndex + 1} von {theses.length}

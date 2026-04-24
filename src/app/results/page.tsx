@@ -51,7 +51,7 @@ function ResultsContent() {
 
   const user = buildUserVector(answers, theses);
   const signal = userSignalStrength(user);
-  const weakSignal = signal < 8; // below ~8 total user-vector magnitude → too neutral to rank meaningfully
+  const weakSignal = signal < 15; // below ~15 total user-vector magnitude → too neutral to rank meaningfully (typical strong users hit 30-60)
   const ranked = rankWithFilters(user, universities, gpa, excluded);
   const filteredOut = universities.length - ranked.length;
   const top = ranked[0];

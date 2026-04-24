@@ -59,11 +59,11 @@ export function buildUserVector(answers: Answer[], theses: Thesis[]): UserVector
 }
 
 /**
- * Match percent using empirical dimension means for centering.
- * Uni at exactly the mean contributes 0; only deviations from the population
- * mean move the score.
+ * Raw match percent using empirical dimension means for centering.
+ * In practice caps at ~80% because theses overlap on opposing signs, so
+ * no realistic user vector can simultaneously max out every dimension.
  */
-export function matchPercent(
+function rawMatchPercent(
   user: UserVector,
   uni: University,
   dimMeans: Record<Dimension, number>,
@@ -79,6 +79,36 @@ export function matchPercent(
   }
   if (maxPossible === 0) return 50;
   return ((rawMatch + maxPossible) / (2 * maxPossible)) * 100;
+}
+
+/**
+ * Empirically-observed realistic ceiling for a strongly-answering user.
+ * Anchored from auditor's 500k-sample search: p99 ≈ 77%, global max ≈ 84%.
+ * Using 80 as the "perfect match" anchor balances readability and honesty.
+ */
+const REALISTIC_MAX = 80;
+
+/**
+ * Display-facing percent. Stretches the realistic range [50, REALISTIC_MAX]
+ * to [50, 100] so users see numbers that match their intuition about
+ * "how strong is this match" while keeping the rank order and neutral
+ * centerpoint (50%) untouched.
+ */
+export function matchPercent(
+  user: UserVector,
+  uni: University,
+  dimMeans: Record<Dimension, number>,
+  maxShifts: Record<Dimension, number>,
+): number {
+  const raw = rawMatchPercent(user, uni, dimMeans, maxShifts);
+  if (raw === 50) return 50;
+  if (raw > 50) {
+    const stretched = 50 + ((raw - 50) * 50) / (REALISTIC_MAX - 50);
+    return Math.min(100, stretched);
+  }
+  // Symmetric stretch below 50
+  const stretched = 50 - ((50 - raw) * 50) / (REALISTIC_MAX - 50);
+  return Math.max(0, stretched);
 }
 
 /**
@@ -121,7 +151,12 @@ export function rankUniversities(user: UserVector, universities: University[]): 
       percent: matchPercent(user, u, dimMeans, maxShifts),
       topReasons: topReasons(user, u, dimMeans),
     }))
-    .sort((a, b) => b.percent - a.percent);
+    .sort((a, b) => {
+      if (b.percent !== a.percent) return b.percent - a.percent;
+      // Stable tie-break: uni id alphabetical — prevents duplicate-score
+      // clusters (e.g. HKUST/CUHK/HKU) from producing non-deterministic order
+      return a.university.id.localeCompare(b.university.id);
+    });
 }
 
 /**

@@ -57,7 +57,7 @@ export const theses: Thesis[] = [
   {
     id: 't10',
     text: 'Ich möchte tief in eine nicht-westliche Kultur eintauchen (Asien, Afrika, Südamerika).',
-    vector: { adventure: 2, easy: -2, language: 1, climate: 1 },
+    vector: { adventure: 2, easy: -2, climate: 1 },
   },
   {
     id: 't11',

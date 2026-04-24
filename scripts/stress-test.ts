@@ -43,8 +43,8 @@ function biasedProfile(name: string, biases: Partial<Record<string, AnswerValue>
 }
 
 const profiles: Profile[] = [
-  // ---- 30 fully random profiles ----
-  ...Array.from({ length: 30 }, (_, i) => makeRandomProfile(i + 1)),
+  // ---- 80 fully random profiles ----
+  ...Array.from({ length: 80 }, (_, i) => makeRandomProfile(i + 1)),
 
   // ---- Edge cases ----
   { name: 'All Neutral', answers: theses.map(() => 0 as AnswerValue) },

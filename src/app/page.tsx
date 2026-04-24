@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 
 export default function Home() {
   return (
@@ -13,9 +12,12 @@ export default function Home() {
           Keine Präferenzen vorher — alles kommt aus deinen Antworten raus.
         </p>
         <div className="mt-10">
-          <Button asChild size="lg" className="rounded-full px-7 h-12 text-base">
-            <Link href="/quiz">Los geht&apos;s →</Link>
-          </Button>
+          <Link
+            href="/quiz"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-950 text-white px-7 h-12 text-base font-medium transition-colors hover:bg-zinc-800"
+          >
+            Los geht&apos;s →
+          </Link>
         </div>
         <p className="mt-6 text-sm text-zinc-400">~3 Minuten · Nichts wird gespeichert</p>
       </div>

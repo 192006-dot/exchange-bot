@@ -1290,7 +1290,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 4, english: 4, language: 5, climate: 4,
+      academic: 5, cost: 4, english: 3, language: 5, climate: 4,
       city: 5, nature: 3, travel: 3, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1310,7 +1310,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 4, english: 4, language: 5, climate: 4,
+      academic: 4, cost: 4, english: 3, language: 5, climate: 4,
       city: 4, nature: 3, travel: 3, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1329,7 +1329,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 5, english: 4, language: 5, climate: 4,
+      academic: 4, cost: 5, english: 3, language: 5, climate: 4,
       city: 4, nature: 3, travel: 3, career: 4, adventure: 5, social: 3, easy: 2,
     },
     highlights: [
@@ -1367,7 +1367,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 4, english: 4, language: 5, climate: 3,
+      academic: 4, cost: 4, english: 3, language: 5, climate: 3,
       city: 4, nature: 4, travel: 3, career: 3, adventure: 5, social: 3, easy: 2,
     },
     highlights: [
@@ -1463,7 +1463,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 3, english: 4, language: 5, climate: 4,
+      academic: 5, cost: 3, english: 2, language: 5, climate: 4,
       city: 5, nature: 2, travel: 5, career: 5, adventure: 5, social: 4, easy: 2,
     },
     highlights: [
@@ -1482,7 +1482,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 3, english: 4, language: 5, climate: 2,
+      academic: 5, cost: 3, english: 2, language: 5, climate: 2,
       city: 5, nature: 2, travel: 4, career: 5, adventure: 5, social: 4, easy: 2,
     },
     highlights: [
@@ -1501,7 +1501,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 5, cost: 3, english: 4, language: 5, climate: 4,
+      academic: 5, cost: 3, english: 2, language: 5, climate: 4,
       city: 5, nature: 2, travel: 5, career: 5, adventure: 5, social: 4, easy: 2,
     },
     highlights: [
@@ -1520,7 +1520,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 3, english: 3, language: 5, climate: 2,
+      academic: 4, cost: 3, english: 2, language: 5, climate: 2,
       city: 5, nature: 2, travel: 4, career: 4, adventure: 5, social: 3, easy: 2,
     },
     highlights: [
@@ -1577,7 +1577,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 2, english: 5, language: 5, climate: 4,
+      academic: 4, cost: 2, english: 4, language: 5, climate: 4,
       city: 5, nature: 3, travel: 4, career: 4, adventure: 5, social: 4, easy: 3,
     },
     highlights: [
@@ -1596,7 +1596,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 3, english: 4, language: 5, climate: 3,
+      academic: 5, cost: 3, english: 3, language: 5, climate: 3,
       city: 5, nature: 3, travel: 4, career: 4, adventure: 4, social: 5, easy: 3,
     },
     highlights: [
@@ -1615,7 +1615,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 5, cost: 3, english: 4, language: 5, climate: 3,
+      academic: 5, cost: 3, english: 3, language: 5, climate: 3,
       city: 5, nature: 3, travel: 4, career: 5, adventure: 4, social: 5, easy: 3,
     },
     highlights: [
@@ -1634,7 +1634,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 5, cost: 3, english: 4, language: 5, climate: 3,
+      academic: 5, cost: 3, english: 3, language: 5, climate: 3,
       city: 5, nature: 3, travel: 4, career: 5, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1653,7 +1653,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 3, english: 4, language: 5, climate: 3,
+      academic: 4, cost: 3, english: 3, language: 5, climate: 3,
       city: 5, nature: 3, travel: 4, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1672,7 +1672,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 5, english: 4, language: 4, climate: 5,
+      academic: 4, cost: 5, english: 3, language: 4, climate: 5,
       city: 5, nature: 3, travel: 5, career: 3, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1691,7 +1691,7 @@ export const universities: University[] = [
     language_of_instruction: 'mixed',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 5, english: 4, language: 4, climate: 5,
+      academic: 4, cost: 5, english: 3, language: 4, climate: 5,
       city: 5, nature: 3, travel: 5, career: 3, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1825,7 +1825,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 5, english: 5, language: 4, climate: 5,
+      academic: 4, cost: 5, english: 4, language: 4, climate: 5,
       city: 5, nature: 3, travel: 4, career: 3, adventure: 5, social: 4, easy: 2,
     },
     highlights: [
@@ -1863,7 +1863,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc'],
     scores: {
-      academic: 4, cost: 4, english: 5, language: 4, climate: 4,
+      academic: 4, cost: 4, english: 4, language: 4, climate: 4,
       city: 5, nature: 3, travel: 5, career: 3, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1882,7 +1882,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 5, cost: 4, english: 5, language: 4, climate: 4,
+      academic: 5, cost: 4, english: 4, language: 4, climate: 4,
       city: 5, nature: 3, travel: 5, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1901,7 +1901,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 4, english: 5, language: 4, climate: 4,
+      academic: 4, cost: 4, english: 4, language: 4, climate: 4,
       city: 5, nature: 3, travel: 5, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [
@@ -1920,7 +1920,7 @@ export const universities: University[] = [
     language_of_instruction: 'english',
     partner_levels: ['BSc', 'MSc'],
     scores: {
-      academic: 4, cost: 2, english: 5, language: 3, climate: 5,
+      academic: 4, cost: 2, english: 4, language: 3, climate: 3,
       city: 5, nature: 2, travel: 5, career: 4, adventure: 4, social: 4, easy: 3,
     },
     highlights: [

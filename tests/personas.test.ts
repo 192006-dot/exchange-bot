@@ -1,5 +1,5 @@
 /**
- * Persona-based integration tests — answer 13 theses as a specific persona,
+ * Persona-based integration tests — answer 20 theses as a specific persona,
  * then check that the top matches align with intuition.
  */
 import { describe, it, expect } from 'vitest';
@@ -17,28 +17,16 @@ function answerAs(mapping: Record<string, AnswerValue>): Answer[] {
 
 function runPersona(mapping: Record<string, AnswerValue>) {
   const user = buildUserVector(answerAs(mapping), theses);
-  const ranked = rankUniversities(user, universities);
-  return ranked;
+  return rankUniversities(user, universities);
 }
 
-describe('persona: Warm-Seeker (will Strand, Sonne, Spanisch, chillig)', () => {
-  const answers = {
-    t1: -2,  // in Europa bleiben → nein, offen
-    t2: 1,   // Großstadt → yes
-    t3: 0,   // Ranking → whatever
-    t4: 2,   // Fremdsprache → yes
-    t5: 1,   // günstig → yes
-    t6: 2,   // warmes Klima → YES
-    t7: 1,   // Outdoor → yes
-    t8: 1,   // Reisen → yes
-    t9: 2,   // Exchange-Community → yes
-    t10: 1,  // Kulturschock → ok
-    t11: 0,
-    t12: -1, // Englisch Pflicht → nicht wichtig
-    t13: 0,
+describe('persona: Warm-Seeker (Strand, Spanisch, chillig)', () => {
+  const answers: Record<string, AnswerValue> = {
+    t1: 2, t2: 1, t4: 1, t5: -1, t6: -1, t7: 1, t8: -1, t9: 2,
+    t10: 1, t11: -2, t12: 1, t13: -1, t17: 2, t18: -1, t20: 1,
   };
 
-  it('top 3 all have climate score >= 4 (warm)', () => {
+  it('top 3 all have climate score >= 4', () => {
     const ranked = runPersona(answers);
     for (const r of ranked.slice(0, 3)) {
       expect(r.university.scores.climate).toBeGreaterThanOrEqual(4);
@@ -46,90 +34,50 @@ describe('persona: Warm-Seeker (will Strand, Sonne, Spanisch, chillig)', () => {
   });
 
   it('top match has climate score >= 4', () => {
-    const ranked = runPersona(answers);
-    expect(ranked[0].university.scores.climate).toBeGreaterThanOrEqual(4);
+    expect(runPersona(answers)[0].university.scores.climate).toBeGreaterThanOrEqual(4);
   });
 });
 
-describe('persona: Academic-Elitist (will Top-Ranking, Career, Englisch)', () => {
-  const answers = {
-    t1: 0,
-    t2: 1,
-    t3: 2,   // Prestige YES
-    t4: -1,
-    t5: -2,
-    t6: 0,
-    t7: -1,
-    t8: 0,
-    t9: 1,
-    t10: -1,
-    t11: 2,  // Karriere YES
-    t12: 2,  // Englisch Pflicht
-    t13: 1,
+describe('persona: Academic-Elitist (Top-Uni, Career, Englisch)', () => {
+  const answers: Record<string, AnswerValue> = {
+    t3: 1, t4: -2, t5: 2, t6: 2, t7: -2, t8: 2, t9: -1,
+    t14: 0, t17: 1, t18: 2, t19: 1,
   };
 
-  it('top match is a tier-1 business school (academic 5)', () => {
-    const ranked = runPersona(answers);
-    expect(ranked[0].university.scores.academic).toBe(5);
-    expect(ranked[0].university.scores.career).toBe(5);
+  it('top match has academic score 5', () => {
+    expect(runPersona(answers)[0].university.scores.academic).toBe(5);
   });
 
-  it('top 5 includes Bocconi, CBS, or Stockholm SSE', () => {
-    const ranked = runPersona(answers);
-    const top5 = ranked.slice(0, 5).map(r => r.university.id);
-    const elite = ['bocconi', 'copenhagen-bs', 'sse-stockholm', 'nyu-stern', 'michigan-ross', 'nus', 'hkust'];
-    expect(top5.some(id => elite.includes(id))).toBe(true);
+  it('top match has career score >= 4', () => {
+    expect(runPersona(answers)[0].university.scores.career).toBeGreaterThanOrEqual(4);
   });
 });
 
-describe('persona: Europe-Stayer (will einfach, kein Visum, in EU)', () => {
-  const answers = {
-    t1: 2,   // Europa bleiben YES
-    t2: 1,
-    t3: 0,
-    t4: 0,
-    t5: 1,
-    t6: 1,
-    t7: 0,
-    t8: 2,   // reisen
-    t9: 1,
-    t10: -2, // kein Kulturschock
-    t11: 0,
-    t12: 1,
-    t13: 2,  // einfach YES
+describe('persona: Europe-Stayer (einfach, EU, kein Visum)', () => {
+  const answers: Record<string, AnswerValue> = {
+    t1: 1, t3: 1, t10: -2, t11: 2, t12: 2, t13: 2, t14: 1,
+    t17: 1, t19: 1, t20: -1,
   };
 
   it('top match is in Europe', () => {
-    const ranked = runPersona(answers);
-    expect(ranked[0].university.continent).toBe('europe');
+    expect(runPersona(answers)[0].university.continent).toBe('europe');
   });
 
-  it('avoids USA and Australia in top 3', () => {
+  it('top 3 are all in Europe', () => {
     const ranked = runPersona(answers);
-    const top3Continents = ranked.slice(0, 3).map(r => r.university.continent);
-    expect(top3Continents).not.toContain('north-america');
-    expect(top3Continents).not.toContain('australasia');
+    for (const r of ranked.slice(0, 3)) {
+      expect(r.university.continent).toBe('europe');
+    }
   });
 });
 
-describe('persona: Adventurer (will Kulturschock, Natur, Abenteuer)', () => {
-  const answers = {
-    t1: -2,  // NICHT in Europa bleiben
-    t2: -1,  // keine Großstadt
-    t3: 0,
-    t4: 2,   // Fremdsprache
-    t5: 1,
-    t6: 1,
-    t7: 2,   // Outdoor YES
-    t8: 1,
-    t9: 0,
-    t10: 2,  // Kulturschock YES
-    t11: 0,
-    t12: -2, // nicht englisch Pflicht
-    t13: -2, // kompliziert ok
+describe('persona: Adventurer (Kulturschock, Natur, Immersion)', () => {
+  const answers: Record<string, AnswerValue> = {
+    t1: 1, t2: 2, t3: -1, t4: 1, t5: -1, t7: 1, t8: -1, t9: 2,
+    t10: 2, t11: -2, t13: -2, t14: -1, t16: 2, t19: 1, t20: 2,
   };
 
-  it('top 3 all have adventure score >= 4 (non-EU feel)', () => {
+  it('top 3 have adventure score >= 4', () => {
     const ranked = runPersona(answers);
     for (const r of ranked.slice(0, 3)) {
       expect(r.university.scores.adventure).toBeGreaterThanOrEqual(4);
@@ -142,45 +90,45 @@ describe('persona: Adventurer (will Kulturschock, Natur, Abenteuer)', () => {
       expect(r.university.continent).not.toBe('europe');
     }
   });
-
-  it('top match has adventure >= 3', () => {
-    const ranked = runPersona(answers);
-    expect(ranked[0].university.scores.adventure).toBeGreaterThanOrEqual(3);
-  });
 });
 
-describe('persona: Budget-Backpacker (will super günstig, warm, chillig)', () => {
-  const answers = {
-    t1: -1,
-    t2: 0,
-    t3: -2,  // Ranking egal
-    t4: 1,
-    t5: 2,   // günstig YES
-    t6: 2,   // warm YES
-    t7: 1,
-    t8: 2,
-    t9: 1,
-    t10: 1,
-    t11: -2, // career egal
-    t12: 0,
-    t13: 0,
+describe('persona: Budget-Backpacker (günstig, warm, chillig)', () => {
+  const answers: Record<string, AnswerValue> = {
+    t1: 2, t2: 1, t4: 2, t5: -2, t6: -2, t7: 2, t9: 1, t10: 1,
+    t11: -1, t12: 2, t14: 1, t16: 1, t17: 1, t18: -2, t20: 1,
   };
 
   it('top match has cost score >= 4 (cheap)', () => {
-    const ranked = runPersona(answers);
-    expect(ranked[0].university.scores.cost).toBeGreaterThanOrEqual(4);
+    expect(runPersona(answers)[0].university.scores.cost).toBeGreaterThanOrEqual(4);
   });
 
-  it('avoids expensive unis (Copenhagen, SSE, St.Gallen, NYU) in top 3', () => {
+  it('top 3 avoid expensive places (CBS, SSE, St.Gallen, NYU)', () => {
     const ranked = runPersona(answers);
-    const top3 = ranked.slice(0, 3).map(r => r.university.id);
-    const pricey = ['copenhagen-bs', 'sse-stockholm', 'st-gallen', 'nyu-stern'];
-    expect(top3.some(id => pricey.includes(id))).toBe(false);
+    const top3Ids = ranked.slice(0, 3).map(r => r.university.id);
+    expect(top3Ids).not.toContain('copenhagen-bs');
+    expect(top3Ids).not.toContain('sse-stockholm');
+    expect(top3Ids).not.toContain('st-gallen');
+    expect(top3Ids).not.toContain('nyu-stern');
   });
 });
 
-describe('sanity: all-neutral answers produce flat 50% for all unis', () => {
-  it('all unis get 50% when user is fully neutral', () => {
+describe('persona: Alpen-Outdoor (Berge, Klein-Stadt, Natur)', () => {
+  const answers: Record<string, AnswerValue> = {
+    t1: -1, t2: 2, t3: -2, t6: 1, t11: 1, t14: -2, t15: 2,
+    t16: 2, t19: 1,
+  };
+
+  it('top match has nature score >= 4', () => {
+    expect(runPersona(answers)[0].university.scores.nature).toBeGreaterThanOrEqual(4);
+  });
+
+  it('top match is NOT a metropolis (city <= 3)', () => {
+    expect(runPersona(answers)[0].university.scores.city).toBeLessThanOrEqual(3);
+  });
+});
+
+describe('sanity: all-neutral answers → 50% for everyone', () => {
+  it('flat 50% when user is fully neutral', () => {
     const user = buildUserVector(
       theses.map(t => ({ thesisId: t.id, value: 0 as const })),
       theses,

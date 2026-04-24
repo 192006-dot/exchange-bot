@@ -3,13 +3,13 @@ import { theses } from '@/data/theses';
 import { DIMENSIONS } from '@/lib/types';
 
 describe('theses data', () => {
-  it('has exactly 13 theses', () => {
-    expect(theses).toHaveLength(13);
+  it('has exactly 20 theses', () => {
+    expect(theses).toHaveLength(20);
   });
 
   it('has unique IDs', () => {
     const ids = theses.map(t => t.id);
-    expect(new Set(ids).size).toBe(13);
+    expect(new Set(ids).size).toBe(20);
   });
 
   it('every thesis has non-empty text', () => {

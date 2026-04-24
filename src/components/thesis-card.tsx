@@ -28,7 +28,7 @@ export function ThesisCard({ thesis, selected, onSelect }: Props) {
             onClick={() => onSelect(opt.value)}
             className={`w-full text-left px-6 py-4 rounded-xl border text-base transition-all cursor-pointer ${
               selected === opt.value
-                ? 'bg-zinc-950 text-white border-zinc-950'
+                ? 'bg-green-600 text-white border-green-600'
                 : 'bg-white text-zinc-900 border-zinc-200 hover:border-zinc-400'
             }`}
           >

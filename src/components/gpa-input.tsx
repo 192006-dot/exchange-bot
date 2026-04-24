@@ -23,15 +23,15 @@ export function GpaInput({ onSubmit }: Props) {
   return (
     <div>
       <p className="text-xs uppercase tracking-widest text-zinc-400 mb-3">
-        Bevor's losgeht
+        Schritt 1 von 3
       </p>
       <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight text-zinc-950 mb-4">
         Was ist dein aktueller GPA?
       </h2>
       <p className="text-zinc-500 leading-relaxed mb-12 max-w-lg">
-        In Maastricht werden Exchange-Plätze nach GPA vergeben. Damit du nur Unis siehst, die für
-        dich realistisch erreichbar sind, brauche ich deinen aktuellen Notendurchschnitt
-        (10-Punkte-Skala).
+        In Maastricht werden Exchange-Plätze nach GPA vergeben (10-Punkte-Skala). Damit du nur Unis
+        siehst, die für dich realistisch erreichbar sind, brauche ich deinen aktuellen
+        Notendurchschnitt.
       </p>
 
       <div className="flex items-baseline gap-4 mb-8">
@@ -50,7 +50,8 @@ export function GpaInput({ onSubmit }: Props) {
       </div>
 
       <p className="text-sm text-zinc-400 mb-8">
-        Meistens zwischen 6.0 und 9.5. Wenn du's genau kennst, auf 2 Nachkommastellen (z.B. 7.86).
+        Typischer Bereich: 6.0 bis 9.5. Wenn du ihn genau kennst, gerne auf 2 Nachkommastellen
+        (z.B. 7.86).
       </p>
 
       <button

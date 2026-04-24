@@ -77,14 +77,16 @@ export function ExclusionsInput({ onSubmit }: Props) {
                   <button
                     key={name}
                     onClick={() => toggle(name)}
+                    aria-pressed={isExcluded}
                     className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all cursor-pointer ${
                       isExcluded
-                        ? 'bg-red-50 border-red-200 text-red-700 line-through decoration-red-400'
+                        ? 'bg-red-600 border-red-600 text-white line-through decoration-white/80 shadow-sm'
                         : 'bg-white border-zinc-200 text-zinc-900 hover:border-zinc-400'
                     }`}
                   >
-                    <span className={isExcluded ? 'opacity-60' : ''}>{flag}</span>
+                    <span className={isExcluded ? 'grayscale opacity-70' : ''}>{flag}</span>
                     {name}
+                    {isExcluded && <span aria-hidden className="text-xs opacity-80">✕</span>}
                   </button>
                 );
               })}
@@ -93,7 +95,7 @@ export function ExclusionsInput({ onSubmit }: Props) {
         ))}
       </div>
 
-      <div className="sticky bottom-6 flex items-center gap-4 pt-4 border-t border-zinc-200 bg-white/90 backdrop-blur-sm">
+      <div className="sticky bottom-0 -mx-6 px-6 pb-6 pt-4 mt-6 flex items-center gap-4 border-t border-zinc-200 bg-white shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.15)]">
         <div className="flex-1 text-sm">
           {excluded.size === 0 ? (
             <span className="text-zinc-500">Kein Land ausgeschlossen.</span>
